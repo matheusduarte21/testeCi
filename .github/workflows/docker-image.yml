@@ -1,4 +1,3 @@
-
 name: CI/CD
 
 on:
@@ -15,22 +14,22 @@ jobs:
     - name: Install dependencies
       run: |
           cd src
-          npm install
+          npm ci  # Considerar trocar para npm ci se houver package-lock.json
 
     - name: Build React app
       run: |
           cd src
           npm run build
     
-    - name: Autenticação no Docker Hub
+    - name: Authenticate to Docker Hub
       uses: docker/login-action@v3.3.0
       with:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
         
     - name: Build the Docker image
-      run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:v1 ./src
+      run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:${{ github.sha }} ./src
 
     - name: Push the Docker image
-      run: docker push matheusduarte21/minikube:v1
+      run: docker push matheusduarte21/minikube:${{ github.sha }}
 
