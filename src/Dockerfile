@@ -1,25 +1,7 @@
-# syntax=docker/dockerfile:1.4
-# 1. For build React app
 FROM node:18
-
-# Set working directory
 WORKDIR /app
-
-# Copiar o package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
-
-# Instalar dependências
-RUN npm ci
-
-# Copiar todo o conteúdo da pasta src para o diretório /app
-COPY . ./
-
-# Definir variáveis de ambiente
-ENV CI=true
-ENV PORT=3000
-
-# Rodar o build
-RUN npm run build
-
+RUN npm install
+COPY . .
 # Executar a aplicação
 CMD ["npm", "start"]
