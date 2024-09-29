@@ -1,6 +1,6 @@
-FROM node:19.5.0-alpine
-WORKDIR /frontend
+FROM node:latest
+WORKDIR /app
 ADD package*.json ./
-COPY . .
 RUN npm install
+COPY . .
 CMD [ "npm", "start" ]
