@@ -13,12 +13,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-          cd src
           npm install
 
     - name: Build React app
       run: |
-          cd src
           npm run build
     
     - name: Autenticação no Docker Hub
