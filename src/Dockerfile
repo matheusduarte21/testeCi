@@ -9,10 +9,10 @@ COPY package.json package-lock.json ./
 
 # Instala as dependências
 RUN npm install
+RUN npm install react-scripts -g
 
 # Copia o diretório 'public' e os arquivos de código fonte da aplicação
-COPY public/ /app/public
-COPY src/ /app/src
+COPY . .
 
 # Gera o build da aplicação React
 RUN npm run build
@@ -22,9 +22,6 @@ FROM nginx:alpine
 
 # Copia o build da aplicação para o diretório de arquivos estáticos do Nginx
 COPY --from=build /app/build /usr/share/nginx/html
-
-# Copia uma configuração customizada do Nginx, se necessário
-COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expor a porta 80 para servir a aplicação
 EXPOSE 80
