@@ -11,6 +11,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4.2.0
+
+    - name: Install dependencies
+      run: |
+          cd src
+          npm ci
+
+    - name: Build React app
+      run: |
+          cd src
+          npm run build
     
     - name: Autenticação no Docker Hub
       uses: docker/login-action@v3.3.0
@@ -20,4 +30,7 @@ jobs:
         
     - name: Build the Docker image
       run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:v1 ./src
+
+    - name: Push the Docker image
+      run: docker push matheusduarte21/minikube:v1
 
