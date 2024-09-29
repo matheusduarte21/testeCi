@@ -19,5 +19,5 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PWD }}
         
     - name: Build the Docker image
-      run: docker build -f ./src/Dockerfile -t ***/kube-news:v1 ./src
+      run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:v1 ./src
 
