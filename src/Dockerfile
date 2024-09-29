@@ -6,7 +6,7 @@ FROM node:lts AS development
 WORKDIR /app
 
 # Copiar o package.json e package-lock.json para o diretório de trabalho
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # Instalar dependências
 RUN npm ci
