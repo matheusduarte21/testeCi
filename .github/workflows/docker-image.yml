@@ -1,15 +1,12 @@
-name: CI
+
+name: CI/CD
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  CI:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +18,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
         
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build ./src --file ./src/Dockerfile --tag my-image-name:$(date +%s)
-
-
-      
+    - name: Construção e push da imagem Docker
+      uses: docker/build-push-action@v6.8.0
+      with:
+        context: ./src
+        file: ./src/Dockerfile
+        push: true
+        tags: |
+          matheusduarte21/kube-news:v1
+          matheusduarte21/kube-news:latest
