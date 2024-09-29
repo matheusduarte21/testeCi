@@ -19,8 +19,8 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PWD }}
         
     - name: Build the Docker image
-      run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:v1 ./src
+      run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:${{github.run_number}} ./src
 
     - name: Push the Docker image
-      run: docker push matheusduarte21/minikube:v1
+      run: docker push matheusduarte21/minikube:latest
 
