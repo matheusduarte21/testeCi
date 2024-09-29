@@ -4,13 +4,13 @@ FROM node:latest
 WORKDIR /app
 
 # Copiar o package.json e o package-lock.json da pasta src
-ADD ./src/package*.json ./
+ADD package*.json ./
 
 # Instalar as dependências
 RUN npm install
 
-# Copiar todo o conteúdo da pasta src para o diretório de trabalho no container
-COPY ./src ./
+# Copiar todo o conteúdo da pasta atual (src) para o diretório de trabalho no container
+COPY . .
 
 # Comando para iniciar a aplicação
 CMD [ "npm", "start" ]
