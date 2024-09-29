@@ -11,15 +11,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4.2.0
 
+    - name: List files in src
+      run: |
+          cd src
+          ls -la
+
     - name: Install dependencies
       run: |
           cd src
           npm install
 
+    - name: Check for react-scripts
+      run: |
+          cd src
+          ls -la node_modules/react-scripts
+
     - name: Build React app
       run: |
           cd src
-          npm run build
+          npx react-scripts build
     
     - name: Autenticação no Docker Hub
       uses: docker/login-action@v3.3.0
