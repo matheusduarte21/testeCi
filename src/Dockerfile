@@ -14,38 +14,12 @@ RUN npm ci
 # Copiar todo o conteúdo da pasta src para o diretório /app
 COPY . ./
 
+# Definir variáveis de ambiente
 ENV CI=true
 ENV PORT=3000
 
-CMD ["npm", "start"]
-
-# Build stage
-FROM development AS build
-
+# Rodar o build
 RUN npm run build
 
-# Development environment
-FROM development AS dev-envs
-RUN apt-get update && apt-get install -y --no-install-recommends git
-
-# Adiciona usuário vscode e grupo docker
-RUN useradd -s /bin/bash -m vscode && \
-    groupadd docker && \
-    usermod -aG docker vscode
-
-# 2. For Nginx setup
-FROM nginx:alpine
-
-# Copiar configuração do nginx
-COPY --from=build /app/.nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-WORKDIR /usr/share/nginx/html
-
-# Remove assets estáticos padrão do nginx
-RUN rm -rf ./*
-
-# Copiar assets estáticos do estágio de build
-COPY --from=build /app/build ./
-
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Executar a aplicação
+CMD ["npm", "start"]
