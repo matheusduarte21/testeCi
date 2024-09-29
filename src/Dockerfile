@@ -5,13 +5,14 @@ FROM node:lts as build
 WORKDIR /app
 
 # Copia os arquivos de dependências
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json ./ 
 
 # Instala as dependências
 RUN npm install
 
-# Copia os arquivos de código
-COPY . .
+# Copia o diretório 'public' e os arquivos de código fonte da aplicação
+COPY public/ /app/public
+COPY src/ /app/src
 
 # Gera o build da aplicação React
 RUN npm run build
