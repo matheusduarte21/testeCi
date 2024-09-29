@@ -1,15 +1,12 @@
-name: CI
+
+name: CI/CD
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  CI:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +25,5 @@ jobs:
         file: ./src/Dockerfile
         push: true
         tags: |
-          matheusduarte21/minikube:v1
-          matheusduarte21/minikube:latest
-
-
-      
+          matheusduarte21/kube-news:v1
+          matheusduarte21/kube-news:latest
