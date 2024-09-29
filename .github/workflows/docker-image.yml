@@ -21,9 +21,15 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
         
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build ./src --file ./src/Dockerfile --tag my-image-name:$(date +%s)
+    - name: Construção e push da imagem Docker
+      uses: docker/build-push-action@v6.8.0
+      with:
+        context: ./src
+        file: ./src/Dockerfile
+        push: true
+        tags: |
+          matheusduarte21/minikube:v1
+          matheusduarte21/minikube:latest
 
 
       
