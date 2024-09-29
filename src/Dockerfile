@@ -1,5 +1,5 @@
 # Stage 1 - Build React app
-FROM node:lts as build
+FROM node:20
 
 # Define o diretório de trabalho no container
 WORKDIR /app
