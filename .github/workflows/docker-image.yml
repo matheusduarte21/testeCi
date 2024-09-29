@@ -22,5 +22,5 @@ jobs:
       run: docker build -f ./src/Dockerfile -t matheusduarte21/minikube:v1 ./src
 
     - name: Push the Docker image
-      run: docker push matheusduarte21/minikube:${{github.run_number}}
+      run: docker push matheusduarte21/minikube:v1
 
