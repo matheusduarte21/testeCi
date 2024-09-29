@@ -18,7 +18,7 @@ jobs:
 
     - name: Build React app
       run: |
-          cd public
+          cd src
           npm run build
     
     - name: Autenticação no Docker Hub
