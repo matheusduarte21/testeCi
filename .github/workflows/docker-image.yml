@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
           cd src
-          npm ci  # ou npm install
+          npm install
 
     - name: Check for react-scripts
       run: |
