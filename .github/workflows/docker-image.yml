@@ -18,12 +18,6 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
         
-    - name: Construção e push da imagem Docker
-      uses: docker/build-push-action@v6.8.0
-      with:
-        context: ./src
-        file: ./src/Dockerfile
-        push: true
-        tags: |
-          matheusduarte21/kube-news:v1
-          matheusduarte21/kube-news:latest
+    - name: Build the Docker image
+      run: docker build -f ./src/Dockerfile -t ***/kube-news:v1 ./src
+
