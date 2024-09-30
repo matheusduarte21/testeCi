@@ -1,17 +1,16 @@
 # Stage 1 - Build React app
 FROM node:lts as build
 
-
 # Define o diretório de trabalho no container
 WORKDIR /app
 
 # Copia os arquivos de dependências
-COPY package.json package-lock.json 
+COPY package.json package-lock.json ./
 
 # Instala as dependências
 RUN npm install
 
-# Copia o diretório 'public' e os arquivos de código fonte da aplicação
+# Copia o código-fonte
 COPY . .
 
 # Gera o build da aplicação React
