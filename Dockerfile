@@ -6,7 +6,7 @@ FROM node:lts as build
 WORKDIR /app
 
 # Copia os arquivos de dependências
-COPY package.json app/package-lock.json 
+COPY package.json package-lock.json 
 
 # Instala as dependências
 RUN npm install
