@@ -30,3 +30,16 @@ jobs:
 
     - name: Push the Docker image
       run: docker push matheusduarte21/minikube:v1
+      
+  CD:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.2.0
+
+      - name: definindo o context
+        uses: Azure/k8s-set-context@v3.0
+        with:
+            method: kubeconfig
+            kubeconfig: ${{secrets.K8S_CONFIG}}
+  
