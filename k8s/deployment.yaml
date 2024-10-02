@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app-deployment
+  labels:
+    app: react-app
+spec:
+  replicas: 3 # Número de réplicas do pod
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+      - name: react-app
+        image: matheusduarte21/minikube:v1 # Nome da sua imagem
+        ports:
+        - containerPort: 80 # Porta que o Nginx está escutando
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-app-service
+spec:
+  type: LoadBalancer # Tipo do Service
+  ports:
+  - port: 80 # Porta exposta
+    targetPort: 80 # Porta no container
+  selector:
+    app: react-app
